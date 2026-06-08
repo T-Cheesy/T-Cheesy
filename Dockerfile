@@ -1,5 +1,5 @@
-# Use a lightweight Java 17 image (perfect for Paper/Spigot 1.12.2 setups)
-FROM openjdk:17-slim
+# Use a highly compatible Java 17 image that works everywhere
+FROM eclipse-temurin:17-jre-focal
 
 # Install curl so your start.sh script can auto-download the server file if needed
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
