@@ -8,5 +8,5 @@ fi
 # Automatically generate and accept the EULA so the server doesn't halt
 echo "eula=true" > eula.txt
 
-# Start the server
-java -Xmx1G -Xms1G -jar paper.jar nogui
+# Start the server restricted to Render's free tier limits (350MB heap, leaving room for system memory)
+java -Xmx350M -Xms256M -XX:+UseG1GC -jar paper.jar nogui
