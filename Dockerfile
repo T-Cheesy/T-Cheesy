@@ -14,7 +14,7 @@ COPY . .
 RUN chmod +x start.sh
 
 # Expose port 8080 for Eaglercraft network traffic
-EXPOSE 8080
+EXPOSE 7860
 
 # Tell the container to launch your startup script when it starts
 CMD ["./start.sh"]
