@@ -1,0 +1,488 @@
+commands:
+  shop:
+    players-only: "&cAlleen spelers kunnen de winkel gebruiken."
+    menu-disabled: "&cHet winkelmenu is uitgeschakeld op deze server."
+    usage:
+      - "&eGebruik: /{label} - Open het winkelmenu"
+      - "&eGebruik: /{label} buy <item> [amount]"
+      - "&eGebruik: /{label} sell <item> [amount]"
+    unknown-item: "&cOnbekend item: {item}"
+    invalid-amount: "&cOngeldige hoeveelheid: {amount}"
+    amount-positive: "&cDe hoeveelheid moet positief zijn."
+    unknown-category: "&cOnbekende winkelfcategorie: {category}"
+  sell-hand:
+    players-only: "&cAlleen spelers kunnen items verkopen."
+    must-hold-item: "&cJe moet een item vasthouden om dit commando te gebruiken."
+    not-in-rotation: "&cDit item is niet beschikbaar in de huidige winkelrotatie."
+  sell-inventory:
+    players-only: "&cAlleen spelers kunnen items verkopen."
+    not-in-rotation: "&cEr zijn geen verkoopbare items beschikbaar in de huidige winkelrotatie."
+  price:
+    usage: "&eGebruik: /{label} <item>"
+    unknown-item: "&cOnbekend item: {item}"
+    not-configured: "&cDat item is niet geconfigureerd in de winkel."
+    header: "&6Prijzen voor &b{item}&6:"
+    buy-line: "&a Kopen: &6{price}"
+    buy-unavailable: "&a Kopen: &7Niet beschikbaar"
+    sell-line: "&c Verkopen: &6{price}"
+    sell-unavailable: "&c Verkopen: &7Niet beschikbaar"
+
+  pricing-admin:
+    usage: "&eGebruik: /pricingadmin <reset|resetall> ..."
+    no-permission: "&cJe hebt geen toestemming om dit commando te gebruiken."
+    lack-permission: "&cJe mist toestemming: {perm}"
+    reset-success: "&aDynamische prijs voor {key} gereset"
+    reset-failed: "&cGeen dynamische prijs gevonden voor {key}"
+    resetall-success: "&aDynamische prijzen voor {count} items gereset."
+    set-success: "&aPrijs van {item} ingesteld op {price}"
+    disable-success: "&aUitgeschakeld {action} voor {item}"
+    disable-failed: "&cKon {action} niet uitschakelen voor {item}"
+    list-header: "&6Prijslijst - pagina {page}/{total}"
+    list-entry: "&e{key} &7- Kopen: {buy} Verkopen: {sell}"
+
+sign-shop-scan:
+  players-only: "&cAlleen spelers kunnen winkelschilden scannen."
+  no-permission: "&cJe hebt geen toestemming om winkelschilden te scannen."
+  scanner-unavailable: "&cHet scannen van schilden is momenteel niet beschikbaar."
+  invalid-radius: "&cDe straal moet tussen {min} en {max} liggen."
+  no-signs: "&eGeen oude winkelschilden gevonden binnen &b{radius}&e blokken."
+  pending-replaced: "&eJe vorige openstaande conversie is vervangen door de nieuwe scan."
+  found: "&a&b{count}&a oud(e) winkelschild(en) gevonden binnen &b{radius}&a blokken."
+  entry: "&7- {action} &b{amount}&7x &b{item}&7 op &f{x}&7, &f{y}&7, &f{z}"
+  more: "&7...en nog &b{remaining}&7 extra schild(en)."
+  limit: "&eAlleen de eerste &b{limit}&e schilden worden getoond. Scan met een kleinere straal om de rest te zien."
+  confirm-hint: "&eVoer &b/{label} confirm &euit om ze te converteren of &b/{label} cancel &eom af te breken."
+  no-pending: "&eJe hebt geen openstaande schildconversies."
+  expired: "&cJe openstaande schildconversie is verlopen. Voer de scan opnieuw uit."
+  converted: "&a&b{success}&a schild(en) succesvol geconverteerd."
+  converted-partial: "&e&b{success}&e schild(en) geconverteerd, maar &c{failed}&e konden niet worden geconverteerd."
+  converted-none: "&cEr zijn geen schilden geconverteerd. Ze zijn mogelijk verwijderd of niet meer geldig."
+  cancelled: "&eDe openstaande schildconversie is geannuleerd."
+  unknown: "&cOnbekend subcommando. Gebruik /{label} scan, /{label} confirm of /{label} cancel."
+
+
+transactions:
+  errors:
+    no-economy: "&cDe winkel is momenteel niet beschikbaar omdat er geen economyleverancier is geconfigureerd."
+    no-buy-permission: "&cJe hebt geen toestemming om items te kopen."
+    no-sell-permission: "&cJe hebt geen toestemming om items te verkopen."
+    amount-positive: "&cDe hoeveelheid moet positief zijn."
+    not-configured: "&cDat item is niet geconfigureerd in de winkel."
+    not-buyable: "&cDat item kan niet in de winkel worden gekocht."
+    not-sellable: "&cDat item kan niet aan de winkel worden verkocht."
+    not-in-rotation: "&cDit item is niet beschikbaar in de huidige winkelrotatie."
+    invalid-buy-price: "&cDit item heeft geen geldige aankoopprijs."
+    invalid-sell-price: "&cDit item heeft geen geldige verkoopprijs."
+    invalid-spawner: "&cDeze spawner is niet correct geconfigureerd."
+    invalid-custom-price: "&cDit item heeft geen geldige prijs."
+    no-inventory-space: "&cJe hebt niet genoeg ruimte in je inventaris."
+    cannot-afford: "&cJe kunt je deze aankoop niet veroorloven."
+    insufficient-items: "&cJe hebt niet genoeg van dat item om te verkopen."
+    no-sellable-items: "&cJe hebt geen verkoopbare items in je inventaris."
+    no-sellable-prices: "&cJe inventaris bevat geen items met geldige verkoopprijzen."
+    transaction-failed: "&cTransactie mislukt: {error}"
+  success:
+    purchase: "&a{amount}&ax &b{item}&a gekocht voor &6{price}&a."
+    sale: "&a{amount}&ax &b{item}&a verkocht voor &6{price}&a."
+    sell-inventory: "&a{items}&a verkocht voor &6{price}&a."
+    spawner-purchase: "&a{amount}&ax &b{item}&a-spawner gekocht voor &6{price}&a."
+  notifications:
+    inventory-leftovers: "&eSommige items zijn aan je voeten gedropt omdat je inventaris vol is."
+  custom-items:
+    minion-crate:
+      name: "&dMinion Krat Sleutel"
+      lore: "&7Een mysterieuze sleutel die miniontechnologie zou ontgrendelen."
+    vote-crate:
+      name: "&bVote Krat Sleutel"
+      lore: "&7In te wisselen bij elk vote-kratstation."
+    spawner-display-name: "&6{entity} &eSpawner"
+  restrictions:
+    minion-head: "&cMinionhoofden zijn alleen verkrijgbaar uit kratten."
+    spawner-menu: "&cSpawners kunnen alleen via het winkelmenu worden gekocht."
+
+gui:
+  common:
+    category-unavailable: "&cDie winkelcategorie is niet meer beschikbaar."
+    entry-unavailable: "&cDat winkelitem kon niet worden gevonden. Open het menu opnieuw."
+    island-level-required: "&cJe moet eilandniveau &e{level}&c bereiken om dit winkelitem te gebruiken."
+    cannot-purchase: "&cDit item kan niet in de winkel worden gekocht."
+    cannot-sell: "&cDit item kan niet aan de winkel worden verkocht."
+    price-unavailable: "&cN/B"
+    actions:
+      buy: "kopen"
+      sell: "verkopen"
+      buy-label: "Kopen"
+      sell-label: "Verkopen"
+  custom-input:
+    prompt: "&eVoer in de chat het aantal in om te {action}.&7 (typ 'cancel' om te stoppen)"
+    cancelled: "&7Aangepast aantal geannuleerd."
+    invalid-number: "&cVoer een geldig nummer in."
+    amount-positive: "&cDe hoeveelheid moet positief zijn."
+  menus:
+    main:
+      empty-title: "&cWinkel Niet Beschikbaar"
+      empty-lore:
+        - "&7Er zijn geen winkelcategorieën geconfigureerd."
+    flat:
+      empty-title: "&cWinkel Niet Beschikbaar"
+      empty-lore:
+        - "&7Er zijn geen winkelitems geconfigureerd."
+      previous-title: "&e\u2190 Vorige pagina"
+      previous-lore:
+        - "&7Ga naar pagina {page}"
+      next-title: "&eVolgende pagina \u2192"
+      next-lore:
+        - "&7Ga naar pagina {page}"
+      page-indicator-title: "&bPagina {current} / {total}"
+      page-indicator-lore:
+        - "&7Blader door alle winkelitems."
+    category:
+      empty-title: "&cGeen Items"
+      empty-lore:
+        - "&7Deze categorie heeft geen items geconfigureerd."
+      back-title: "&e\u2190 Terug naar winkel"
+      back-lore:
+        - "&7Keer terug naar het hoofdmenu van de winkel."
+    quantity:
+      title-buy: "&aKoop "
+      title-sell: "&6Verkoop "
+      instructions: "&eLinksklik om te kopen, rechtsklik om te verkopen."
+      buy-line: "&7Koop per stuk: &a{price}"
+      buy-stack-line: "&7Koop {amount}: &a{price}"
+      buy-unavailable: "&cKopen niet beschikbaar."
+      sell-line: "&7Verkoop per stuk: &c{price}"
+      sell-stack-line: "&7Verkoop {amount}: &c{price}"
+      sell-unavailable: "&cKan niet aan de winkel verkopen."
+      option-title: "&e{amount}x"
+      option-buy-lore:
+        - "&7Koop {amount}: &a{price}"
+        - "&eKlik om deze hoeveelheid te {action}."
+      option-sell-lore:
+        - "&7Verkoop {amount}: &c{price}"
+        - "&eKlik om deze hoeveelheid te {action}."
+      custom-title: "&bAangepaste hoeveelheid"
+      custom-lore:
+        - "&7Voer een aangepaste hoeveelheid in om te {action}."
+        - "&8Typ het aantal in de chat."
+        - "&8Typ 'cancel' om terug te gaan."
+      back-title: "&e\u2190 Terug naar winkel"
+      back-lore:
+        - "&7Keer terug naar het hoofdmenu van de winkel."
+      level-requirement: "&cVereist eilandniveau {level}."
+
+signs:
+  no-permission: "&cJe hebt geen toestemming om winkelschilden te maken."
+  invalid-action: "&cDe tweede regel moet 'buy' of 'sell' zijn."
+  unknown-item: "&cOnbekend item: {item}"
+  invalid-amount: "&cDe vierde regel moet een positieve hoeveelheid zijn."
+  not-configured: "&cDat item is niet geconfigureerd in de winkel."
+  not-available: "&cDat item kan niet worden {action} via de winkel."
+  ready: "&aWinkelschild klaar: {action} &b{amount}&ax &b{item}&a."
+  malformed: "&cDit winkelschild is niet correct geconfigureerd."
+  actions:
+    buy-verb: "gekocht"
+    sell-verb: "verkocht"
+    buy-label: "&aKopen"
+    sell-label: "&cVerkopen"
+  display:
+    header: "&2[Shop]"
+    buy-prefix: "&aBuy &7x"
+    buy-suffix: " &7for &6{price}"
+    sell-prefix: "&cSell &7x"
+    sell-suffix: " &7for &6{price}"
+    item-format: "&b{item}"
+    price-format: "&6{price}"
+    unavailable-format: "&cUnavailable"
+
+player-shops:
+  sign-format:
+    available-header: "&2[PlayerShop]"
+    out-of-stock-header: "&c[PlayerShop]"
+    owner-prefix: "&7"
+    owner-suffix: "'s"
+    unknown-owner-name: "Owner"
+    item-prefix: "&b"
+    item-middle: "&7x &b"
+    item-suffix: " -"
+    price-prefix: "&6"
+    price-suffix: " &7for &6{price}"
+    out-of-stock-line: "&cOut of Stock"
+  messages:
+    menu:
+      inventory-title: "&2Player Shop Setup"
+      confirm-button:
+        name: "&aSave Settings"
+        lore:
+          - "&7Apply these values to your next shop."
+      select-item:
+        name: "&eSelect Item"
+        lore:
+          - "&7Click an item in your inventory to choose it."
+          - "&7Current: None"
+          - "&7Click this slot to clear the selection."
+      item-selected-clear-hint: "&7Click to clear this selection."
+      quantity-display:
+        name: "&bQuantity"
+        value-format: "&ex{amount}"
+      price-display:
+        name: "&6Price"
+        value-format: "&e{price}"
+      quantity-adjust:
+        minus-one: "&c-1"
+        minus-sixteen: "&c-16"
+        plus-sixteen: "&a+16"
+        plus-one: "&a+1"
+      price-adjust:
+        minus-one: "&c-1"
+        minus-ten: "&c-10"
+        plus-ten: "&a+10"
+        plus-one: "&a+1"
+      item-description-format: "&b{amount}&7x {item}"
+      unknown-item:
+        singular: "&bItem"
+        plural: "&bItems"
+
+# English fallback keys added from messages_en.yml to ensure full key coverage
+# (keep existing translations above; these are used when a translation is missing)
+shop:
+  common:
+    menu:
+      fill-display-name: "&7 "
+    item-display-name: "&f{material}"
+    buy-line: "&7Buy {amount}: &a{buy_total}"
+    sell-line: "&7Sell {amount}: &c{sell_total}"
+    shift-click-line: "&7Shift-click {bulk_amount}: &a{buy_bulk_total} &7/ &c{sell_bulk_total}"
+    cannot-sell-line: "&7This item cannot be sold."
+    buy-only-shift-line: "&7Shift-click {bulk_amount}: &a{buy_bulk_total}"
+    spawner-display-name: "&f{spawner}"
+  categories:
+    building:
+      name: "&eBuilding Blocks"
+      icon-display-name: "&eBuilding Blocks"
+      icon-lore: "&7Blocks for construction projects."
+      menu:
+        title: "&eBuilding Blocks"
+    farming:
+      name: "&aFarming Supplies"
+      icon-display-name: "&aFarming Supplies"
+      icon-lore: "&7Common crops and farming goods."
+      menu:
+        title: "&aFarming Supplies"
+    food:
+      name: "&eFood & Meals"
+      icon-display-name: "&eFood & Meals"
+      icon-lore: "&7Everyday meals and snacks."
+      menu:
+        title: "&eFood & Meals"
+    daily_specials:
+      name: "&dDaily Specials"
+      icon-display-name: "&dDaily Specials"
+      icon-lore: "&7Hand-picked deals that change throughout the day."
+      menu:
+        title: "&dDaily Specials"
+      rotation-defaults:
+        visit-lore: "&7Visit often to catch the featured option."
+        admin-hint: "&7Admins can swap options manually by editing shop-rotations.yml."
+      item-note: "&7Limited-time special - grab it while it lasts!"
+    decorations:
+      name: "&dDecorations & Lighting"
+      icon-display-name: "&dDecorations & Lighting"
+      icon-lore: "&7Ornamental blocks and lighting."
+      menu:
+        title: "&dDecorations & Lighting"
+    enchantments:
+      name: "&5Enchantment Books"
+      icon-display-name: "&5Enchantment Books"
+      icon-lore: "&7Powerful books for upgrading your gear."
+      menu:
+        title: "&5Enchantment Books"
+      item-display-name: "&d{enchantments} Book"
+      contains-line: "&7Contains: &b{enchantments}"
+    fishing:
+      name: "&bFishing Gear"
+      icon-display-name: "&bFishing Gear"
+      icon-lore: "&7Fishing essentials and bait."
+      menu:
+        title: "&bFishing Gear"
+      item-note: "&7Freshly stocked for anglers."
+    mining:
+      name: "&bMining Resources"
+      icon-display-name: "&bMining Resources"
+      icon-lore: "&7Ores, ingots, and stone."
+      menu:
+        title: "&bMining Resources"
+      item-note: "&7Trusted by miners everywhere."
+    mob_drops:
+      name: "&cMob Drops & Combat"
+      icon-display-name: "&cMob Drops & Combat"
+      icon-lore: "&7Mob drops and combat gear."
+      menu:
+        title: "&cMob Drops & Combat"
+      item-note: "&7Favored by hunters and warriors."
+    redstone:
+      name: "&cRedstone & Utility"
+      icon-display-name: "&cRedstone & Utility"
+      icon-lore: "&7Automation components and wiring."
+      menu:
+        title: "&cRedstone & Utility"
+      sell-portal-display-name: "&6Sell Portal"
+      sell-portal-lore-1: "&7Automatically sells items that touch the portal."
+      sell-portal-lore-2: "&7Price: &a{buy}"
+      sell-portal-lore-3: "&7Only items with a shop sell price are converted."
+    spawners:
+      name: "&6Mob Spawners"
+      icon-display-name: "&6Mob Spawners"
+      icon-lore: "&7Purchase mob spawners to power your island grinders."
+      menu:
+        title: "&6Mob Spawners"
+      spawns-line: "&7Spawns: &b{spawner_name}"
+    valuables:
+      name: "&bValuables & Rares"
+      icon-display-name: "&bValuables & Rares"
+      icon-lore: "&7Rare and valuable items."
+      menu:
+        title: "&bValuables & Rares"
+      item-note: "&7Guaranteed by the shopkeeper."
+    wood:
+      name: "&aWood & Nature"
+      icon-display-name: "&aWood & Nature"
+      icon-lore: "&7Raw lumber and forestry goods."
+      menu:
+        title: "&aWood & Nature"
+
+  common:
+    prices-may-change: "&7Prices may change over time."
+
+  menu:
+    main:
+      title: "&aServer Shop"
+    category:
+      back-display-name: "&eBack"
+      back-lore: "&7Return to the main shop menu."
+
+  stock:
+    gui:
+      overview:
+        title: "&6Stock Market Overview"
+      filter:
+        all: "All Stocks"
+        category: "By Category"
+        price: "By Price"
+      localization:
+        next-page: "&aNext Page"
+        prev-page: "&cPrevious Page"
+        filter-label: "&eFilter: {filter}"
+        no-stocks: "&cNo tradable stocks found."
+        item-format: "&e{item} &7- &6{price}"
+      see-all:
+        display-name: "&bSee All Stocks"
+        lore:
+          - "&7View all available stocks in the market."
+          - "&eClick to browse everything!"
+      all-stocks:
+        title: "&bAll Stocks"
+        back-display-name: "&cBack to My Stocks"
+        back-lore: "&7Return to your stock overview"
+        filter-button-display: "&aFilter: {filter}"
+        filter-button:
+          lore:
+            click: "&7Click to cycle filters"
+            current: "&eCurrent: {filter}"
+        filters:
+          all: "All Items"
+          blocks: "Blocks"
+          items: "Items"
+        pagination:
+          previous: "&aPrevious Page"
+          next: "&aNext Page"
+        localization:
+          item-price-format: "&7Current Price: &6{price}"
+          item-blocked: "&cBlocked"
+          item-frozen: "&bFrozen"
+          no-items: "&cNo items match the current filter."
+
+  shop:
+    rotations:
+      daily_specials:
+        farming_frenzy:
+          display-name: "&aDaily Special: Farming Frenzy"
+          lore: "&7Staple crops on sale for islands stocking up."
+          menu-title: "&aDaily Special: Farming Frenzy"
+        monster_madness:
+          display-name: "&cDaily Special: Monster Madness"
+          lore: "&7Overstocked mob drops priced to move."
+          menu-title: "&cDaily Special: Monster Madness"
+          harvest_bundle:
+            display-name: "&cRotten Flesh Bundle"
+            note: "&7Fresh from tonight's mob farm cleanup."
+          seasonal_treats:
+            display-name: "&cExplosive Care Package"
+            note: "&7Perfect for crafting rockets or TNT."
+          premium_pick:
+            display-name: "&cBlaze Rod Stash"
+            note: "&7Stockpile rods for brewing stands and fuel."
+        miner_mania:
+          display-name: "&bDaily Special: Miner Mania"
+          lore: "&7Premium ore shipments delivered overnight."
+          menu-title: "&bDaily Special: Miner Mania"
+          harvest_bundle:
+            display-name: "&bBulk Iron Ingot Shipment"
+            note: "&7Perfect for hoppers, anvils, and tools."
+          seasonal_treats:
+            display-name: "&bRefined Gold Ingot Batch"
+            note: "&7Ideal for beacons, apples, and rails."
+          premium_pick:
+            display-name: "&bShimmering Diamond Parcel"
+            note: "&7Treat yourself or resell at a premium."
+hooks:
+  player-lacking-permission-message: "&cJe hebt geen toestemming om winkelhook-commando's uit te voeren."
+    # Player shop message keys (Dutch)
+    no-permission-create: "&cJe hebt geen toestemming om winkels te maken."
+    sign-requires-chest: "&cWinkelschilden moeten aan een kist bevestigd zijn."
+    enter-quantity: "&cVoer de hoeveelheid in op de tweede regel."
+    quantity-prompt: "&cAantal?"
+    enter-price: "&cVoer de prijs in op de derde regel."
+    price-prompt: "&cPrijs?"
+    using-saved-settings: "&aGebruikt je opgeslagen /playershop instellingen."
+    chest-access-denied: "&cJe kunt de kist van een andere speler niet openen."
+    break-denied: "&cJe kunt de winkel van iemand anders niet slopen."
+    shop-removed: "&eWinkel verwijderd."
+    creation-invalid-configuration: "&cOngeldige winkelconfiguratie."
+    creation-quantity-positive: "&cHoeveelheid moet groter zijn dan nul."
+    creation-quantity-min: "&cHoeveelheid moet minimaal &b{min}&c zijn."
+    creation-quantity-max: "&cHoeveelheid mag niet meer zijn dan &b{max}&c."
+    creation-price-positive: "&cPrijs moet groter zijn dan nul."
+    creation-price-min: "&cPrijs moet minimaal &6{min}&c zijn."
+    creation-price-max: "&cPrijs mag niet meer zijn dan &6{max}&c."
+    creation-sign-in-use: "&cEr is al een winkel op dit bord."
+    creation-chest-unresolved: "&cWinkelkisten konden niet worden gevonden."
+    creation-chest-in-use: "&cEen winkel gebruikt die kist al."
+    creation-chest-inaccessible: "&cKan geen toegang krijgen tot de kist."
+    creation-selected-item-missing: "&cDe kist bevat het geselecteerde item uit /playershop niet."
+    creation-item-missing: "&cPlaats het item dat je wilt verkopen in de kist."
+    creation-insufficient-stock: "&cDe kist bevat niet genoeg items om de winkel te starten."
+    creation-success: "&aWinkel succesvol aangemaakt!"
+    purchase-invalid: "&cOngeldige winkel aankoop poging."
+    purchase-no-permission: "&cJe hebt geen toestemming om bij winkels te kopen."
+    purchase-no-economy: "&cDe winkel is momenteel niet beschikbaar omdat er geen economyleverancier is geconfigureerd."
+    purchase-own-shop: "&cJe kunt niet bij je eigen winkel kopen."
+    purchase-missing-chest: "&cDe winkelkist ontbreekt. De aanbieding is verwijderd."
+    purchase-out-of-stock: "&cDeze winkel is momenteel uitverkocht."
+    purchase-no-space: "&cJe hebt niet genoeg ruimte in je inventaris."
+    purchase-transaction-failed: "&cTransactie mislukt: {error}"
+    purchase-owner-notify: "&b{buyer} &aheeft &b{item}&a gekocht voor &6{price}&a."
+    purchase-buyer-success: "&a{item}&a gekocht van &b{seller}&a voor &6{price}&a."
+    unknown-seller-name: "de verkoper"
+    setup-open: "&aConfigureer je spelerswinkel instellingen en bevestig om op te slaan."
+    setup-item-selected: "&aGeselecteerd &b{item}&a om te verkopen."
+    setup-item-cleared: "&eGeselecteerd item gewist. De inhoud van de kist bepaalt wat de winkel verkoopt."
+    setup-select-item: "&eKlik op een item in je inventaris om te kiezen wat je wilt verkopen."
+    setup-saved: "&aSpelerswinkel instellingen opgeslagen. Plaats een [playershop] bord op een kist om ze te gebruiken."
+    setup-quantity-chat-prompt: "&eTyp de hoeveelheid om te verkopen in de chat, of typ cancel om te stoppen."
+    setup-price-chat-prompt: "&eTyp de prijs in de chat, of typ cancel om te stoppen."
+    setup-chat-cancelled: "&eInvoer geannuleerd. Vorige waarde behouden."
+    setup-chat-invalid-number: "&cVoer een geldig nummer in."
+    setup-quantity-updated: "&aHoeveelheid ingesteld op &b{amount}&a."
+    setup-price-updated: "&aPrijs ingesteld op &6{price}&a."
+    command-players-only: "&cAlleen spelers kunnen dit commando gebruiken."
+    command-disabled: "&cSpelerswinkels zijn momenteel uitgeschakeld."

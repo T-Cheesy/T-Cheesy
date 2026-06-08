@@ -1,0 +1,55 @@
+# Vault 2.0 — internal economy compatible with the Vault API
+# Provides balance, player-to-player payments, and config/message reload.
+# Commands: /balance, /pay, /vault reload. No external Vault.jar required.
+update-check: true
+plugin_version: '1.6'
+language: en
+currency:
+  symbol: $
+  position: suffix
+  space: true
+  format: auto
+storage:
+  use_mysql: false
+  mysql:
+    host: localhost
+    port: 3306
+    database: vault
+    username: root
+    password: ''
+    pool_size: 10
+import:
+  essentials:
+    enabled: false
+    replace: false
+offline-uuid-fallback: true
+update_check: true
+update_check_debug: false
+pay_menu:
+  size: 27
+  show_self: false
+pay_pending:
+  max_on_join: 5
+pay_limits:
+  min: 1
+  max: 100000
+loans:
+  enabled: true
+  max_active_per_player: 1
+  min_amount: 1
+  max_amount: 100000
+  min_installment: 1
+  min_installment_by_amount:
+    '1000': 50
+    '5000': 250
+  max_installments: 60
+  default_interval_hours: 24
+  charge_check_seconds: 60
+  max_missed_payments: 3
+  defaulted_effects:
+    enabled: true
+    refresh_seconds: 5
+    duration_seconds: 8
+    effects:
+    - SLOW:1
+    - SLOW_DIGGING:1

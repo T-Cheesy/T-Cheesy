@@ -1,0 +1,28 @@
+title: "&bOres Shop"
+size: 27
+
+items:
+  - material: IRON_INGOT
+    amount: 1
+    buy: 75.0
+    sell: 37.5
+    name: "&fIron"
+    
+
+  - material: DIAMOND
+    amount: 1
+    buy: 100.0
+    sell: 50.0
+    name: "&bDiamond"
+    
+
+back:
+  material: ARROW
+  name: "&cBack"
+  slot: 26
+  lore:
+    - "&7Click to return to the main menu"
+
+border:
+  material: GRAY_STAINED_GLASS_PANE
+  style: full

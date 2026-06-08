@@ -1,0 +1,43 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 216.163.91.80
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1777866115831
+  login: 1777865730407
+  kits:
+    firework: 1777852153827
+    notch: 1777852164158
+    dtools: 1777852169871
+    color: 1777852192525
+money: '0'
+last-account-name: M4cAndCh33z3W3l1
+logoutlocation:
+  world: f44e5ced-00b3-428b-9e4f-10edd184b700
+  world-name: world
+  x: -0.12323072040593054
+  y: 199.0
+  z: 2.3617463128013263
+  yaw: -190.350341796875
+  pitch: 9.899995803833008
+lastlocation:
+  world: f44e5ced-00b3-428b-9e4f-10edd184b700
+  world-name: world
+  x: 6.699904382992332
+  y: 198.0
+  z: -10.36526248717681
+  yaw: -0.81622314453125
+  pitch: -4.40567746409215E-5

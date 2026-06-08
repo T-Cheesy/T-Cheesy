@@ -1,0 +1,28 @@
+title: "&cFood Shop"
+size: 27
+
+items:
+  - material: APPLE
+    amount: 1
+    buy: 10.0
+    sell: 5.0
+    name: "&cApple"
+    
+
+  - material: BREAD
+    amount: 1
+    buy: 15.0
+    sell: 7.5
+    name: "&eBread"
+    
+
+back:
+  material: ARROW
+  name: "&cBack"
+  slot: 26
+  lore:
+    - "&7Click to return to the main menu"
+
+border:
+  material: GRAY_STAINED_GLASS_PANE
+  style: full

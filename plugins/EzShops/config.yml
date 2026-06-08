@@ -1,0 +1,142 @@
+# Global EzShops configuration.
+
+# When enabled, verbose startup logs and detailed debug information will be
+# printed to the console. Recommended for troubleshooting only.
+# Default: false
+debug: false
+
+# Enable integration with EzBoost for sell price boosts.
+# Requires EzBoost plugin to be installed.
+# Default: true
+ezboost-integration: true
+
+language: en
+
+signs:
+  # Header tokens that count as shop signs. Include legacy values here if you
+  # change the display header so existing signs keep working.
+  headers:
+    - "[shop]"
+  display:
+    header: "{translate:signs.display.header}"
+    buy-format: "{translate:signs.display.buy-prefix}{amount}{translate:signs.display.buy-suffix}"
+    sell-format: "{translate:signs.display.sell-prefix}{amount}{translate:signs.display.sell-suffix}"
+    item-format: "{translate:signs.display.item-format}"
+    price-format: "{translate:signs.display.price-format}"
+    unavailable-format: "{translate:signs.display.unavailable-format}"
+
+player-shops:
+  # Toggle the entire player shop system on or off.
+  enabled: true
+  # Recognized first-line tokens that trigger a player shop sign.
+  headers:
+    - "[playershop]"
+  # When true, other players cannot open or break player shop chests/signs.
+  # Set to false to allow other players to open the chest and break the sign.
+  protection-enabled: true
+  # When true, players must have enough stock for the first sale to finish
+  # setup; otherwise the sign activates but will show as out of stock until
+  # restocked.
+  require-stock-on-creation: true
+  # Optional quantity and price guards. Leave max values at 0 to disable the
+  # restriction entirely.
+  min-quantity: 1
+  max-quantity: 0
+  min-price: 0.0
+  max-price: 0.0
+  sign-format:
+    available-header: "{translate:player-shops.sign-format.available-header}"
+    out-of-stock-header: "{translate:player-shops.sign-format.out-of-stock-header}"
+    owner-format: "{translate:player-shops.sign-format.owner-prefix}{owner}{translate:player-shops.sign-format.owner-suffix}"
+    unknown-owner-name: "{translate:player-shops.sign-format.unknown-owner-name}"
+    item-format: "{translate:player-shops.sign-format.item-prefix}{amount}{translate:player-shops.sign-format.item-middle}{item}{translate:player-shops.sign-format.item-suffix}"
+    price-format: "{translate:player-shops.sign-format.price-prefix}{price}{translate:player-shops.sign-format.price-suffix}"
+    out-of-stock-line: "{translate:player-shops.sign-format.out-of-stock-line}"
+
+categories:
+  # Toggle whether the category-based /shop GUI is enabled. When disabled,
+  # players can still use text commands and shop signs, but the menu will not
+  # open.
+  enabled: true
+  # When categories are disabled, set this to true to display all shop items in
+  # a single paginated list instead of disabling the menu entirely.
+  single-list-when-disabled: false
+
+sell:
+  # Ignore items with NBT (custom tags/metadata) during /sellhand and /sellinventory
+  # When enabled, only plain items without NBT will be sold.
+  # For example: if you have a "Supreme Bone" (with NBT) and normal bones,
+  # only the normal bones will be sold when using /sellinventory.
+  # Default: false
+  ignore-items-with-nbt: false
+
+  # NBT tag filter for more granular control
+  # Mode: 'off', 'whitelist', or 'blacklist'
+  #   - 'off' (default): Ignore the filter, use ignore-items-with-nbt setting only
+  #   - 'whitelist': Only allow items with NBT tags in the whitelist
+  #   - 'blacklist': Block items with NBT tags in the blacklist
+  nbt-filter:
+    mode: "off"
+    whitelist: []
+    blacklist: []
+
+dynamic-pricing:
+  # Toggle whether dynamic pricing multipliers are active at all.
+  enabled: true
+  # Default values applied when a shop entry enables dynamic pricing but omits
+  # individual settings.
+  defaults:
+    starting-multiplier: 1.0
+    min-multiplier: 0.5
+    max-multiplier: 3.0
+    buy-change: 0.0
+    sell-change: 0.0
+
+stock:
+  # Stock Market System
+  #
+  # The following options control the /stock buy, sell, and overview commands.
+  #
+  # Permissions:
+  #   ezshops.stock.buy      - Allow buying stocks
+  #   ezshops.stock.sell     - Allow selling stocks
+  #   ezshops.stock.overview - Allow viewing the stock market overview
+  #
+  # Options:
+  #   enabled: Master switch for all stock features (true = enabled, false = disables all stock commands and GUIs)
+  #   cooldown-millis: Per-player cooldown in milliseconds between trades (0 = no cooldown)
+  #   blocked: List of item names (Material) to block from stock trading
+  #   overrides: List of custom items to add to the stock market (must specify id, display, and base-price)
+  #
+  # Example:
+  # stock:
+  #   enabled: true
+  #   cooldown-millis: 10000
+  #   blocked:
+  #     - BEDROCK
+  #     - COMMAND_BLOCK
+  #   overrides:
+  #     - id: "DIAMOND"
+  #       display: "&bDiamond"
+  #       base-price: 100.0
+  #
+  # Use /stock overview to see all available stocks and their prices.
+  enabled: true
+  cooldown-millis: 10000
+  # List of item names (Material) to block from stock trading
+  blocked:
+    - BEDROCK
+    - COMMAND_BLOCK
+  # List of override items to add to the stock market (must specify all fields)
+  overrides:
+    - id: "DIAMOND"
+      display: "{translate:stock.overrides.diamond.display}"
+      base-price: 100.0
+    # Add more overrides as needed
+
+# Hooks
+# Message sent to players when a hook requests execution as the player but
+# they lack the required permission (`ezshops.hooks.use`). Use & color codes.
+# Set to null or remove to disable the player-facing message.
+hooks:
+  player-lacking-permission-message: "{translate:hooks.player-lacking-permission-message}"

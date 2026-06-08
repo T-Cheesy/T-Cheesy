@@ -1,0 +1,79 @@
+# This is the main configuration file for Beast.
+# As you can see, there's tons to configure. Some options may impact gameplay, so use
+# with caution, and make sure you know what each option does before configuring.
+
+config-version: 1
+time-update-period: 20
+virtual-thread-for-async-executor: false
+reduce-inventory-updates: true
+dynamic-view-distance: true
+zstd-compression: false
+compression:
+  chunk-compression-level: -1
+virtual-thread-for-scheduler: false
+alternate-current: false
+pause-server-when-empty: false
+optimize-minecart-collision:
+  enabled: false
+  skip-tick-count: 30
+halloween-mob-feature: true
+paper-custom-flow-speed: true
+step-sounds: true
+disable-villages: false
+alternative-chat-component-parser: false
+relative-arrow-motion: true
+round-player-ping: false
+ping-period: 15
+entity-tracker-check-y: false
+save-json-async: false
+map-decorations-limit: 10
+drop-use-packets-in-inventory: false
+generate-portal-exit-chunks: false
+async-player-list: true
+disable-collision-check: false
+portal-travel:
+  cache-life: 15
+  instant-expire: false
+delayed-chunks:
+  enabled: false
+  limit: 4
+shape-check:
+  wither: true
+  end-portal: true
+  nether-portal: true
+log:
+  empty-messages-warning: false
+  moved-wrongly-warning: false
+  moved-too-quickly-warning: false
+old-combat:
+  enabled: false
+  attack-speed: false
+  regen: false
+  potions-duration: false
+  golden-apple: false
+  fire-combust: false
+  blocking-modifier: false
+  projectile-motion: false
+  fishing-hooks-knockback: false
+  disable-new-sounds: false
+  disable-damage-indicator: false
+  disable-pearl-cooldown: false
+  hide-item-attributes: false
+light-throttling:
+  delay: 100
+  redelaying: false
+  allow-block-relight: true
+packet-limiter:
+  kick-message: Kicked for exceeding packet rate limit
+  all-packets:
+    interval: 7.0
+    max-packet-rate: 500.0
+    action: KICK
+  action: DROP
+  max-packet-rate: 5.0
+  interval: 4.0
+  overrides:
+    PacketPlayInAutoRecipe:
+      interval: 4.0
+      max-packet-rate: 5.0
+      action: DROP

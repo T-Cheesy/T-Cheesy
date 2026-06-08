@@ -1,0 +1,24 @@
+# Economy Provider
+# Options: Vault (default), Essentials
+# If using Essentials, make sure it's installed alongside this plugin
+economy_provider: Vault
+
+back:
+  # If true, all sections will use the global back.slot when set (prevents overwriting)
+  force_global_slot: true
+
+border:
+  material: BLACK_STAINED_GLASS_PANE
+  style: full # options: full, corners, none
+
+# File Structure
+# The plugin automatically organizes files as follows:
+# ShopPlugin/
+#   ├── config.yml (this file - global settings)
+#   ├── Shops/ (shop item definitions)
+#   │   ├── blocks.yml
+#   │   ├── food.yml
+#   │   └── ores.yml
+#   └── Sections/ (shop section list)
+#       └── sections.yml
+

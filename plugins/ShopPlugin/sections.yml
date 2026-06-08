@@ -1,0 +1,25 @@
+title: "&aServer Shop Sections"
+size: 27
+
+sections:
+  - id: blocks
+    name: "&aBlocks Shop"
+    icon: GRASS_BLOCK
+    lore:
+      - "&7Click to open the Blocks Shop"
+
+  - id: food
+    name: "&cFood Shop"
+    icon: APPLE
+    lore:
+      - "&7Click to open the Food Shop"
+
+  - id: ores
+    name: "&bOres Shop"
+    icon: DIAMOND
+    lore:
+      - "&7Click to open the Ores Shop"
+
+border:
+  material: GRAY_STAINED_GLASS_PANE
+  style: full

@@ -1,0 +1,439 @@
+commands:
+  shop:
+    players-only: "&c只有玩家可以使用商店。"
+    menu-disabled: "&c此服务器已禁用商店菜单。"
+    usage:
+      - "&e用法：/{label} - 打开商店菜单"
+      - "&e用法：/{label} buy <item> [amount]"
+      - "&e用法：/{label} sell <item> [amount]"
+    unknown-item: "&c未知物品：{item}"
+    invalid-amount: "&c数量无效：{amount}"
+    amount-positive: "&c数量必须为正数。"
+    unknown-category: "&c未知的商店分类：{category}"
+  sell-hand:
+    players-only: "&c只有玩家可以出售物品。"
+    must-hold-item: "&c你必须拿着一个物品才能使用此指令。"
+    not-in-rotation: "&c该物品在当前商店轮换中不可用。"
+  sell-inventory:
+    players-only: "&c只有玩家可以出售物品。"
+    not-in-rotation: "&c当前商店轮换中没有可出售的物品。"
+  price:
+    usage: "&e用法：/{label} <item>"
+    unknown-item: "&c未知物品：{item}"
+    not-configured: "&c该物品未在商店中配置。"
+    header: "&6&b{item}&6 的价格："
+    buy-line: "&a 购买：&6{price}"
+    buy-unavailable: "&a 购买：&7不可用"
+    sell-line: "&c 出售：&6{price}"
+    sell-unavailable: "&c 出售：&7不可用"
+
+  pricing-admin:
+    usage: "&e用法：/pricingadmin <reset|resetall> ..."
+    no-permission: "&c你没有权限使用此命令。"
+    lack-permission: "&c你缺少权限：{perm}"
+    reset-success: "&a已重置 {key} 的动态定价"
+    reset-failed: "&c未找到 {key} 的动态定价"
+    resetall-success: "&a已重置 {count} 个物品的动态定价。"
+    set-success: "&a已将 {item} 的价格设置为 {price}"
+    disable-success: "&a已为 {item} 禁用 {action} 操作"
+    disable-failed: "&c无法为 {item} 禁用 {action} 操作"
+    list-header: "&6价格列表 - 第 {page}/{total} 页"
+    list-entry: "&e{key} &7- 购买: {buy} 出售: {sell}"
+
+sign-shop-scan:
+  players-only: "&c只有玩家可以扫描商店告示牌。"
+  no-permission: "&c你没有权限扫描商店告示牌。"
+  scanner-unavailable: "&c当前无法扫描告示牌。"
+  invalid-radius: "&c半径必须介于 {min} 和 {max} 之间。"
+  no-signs: "&e在 &b{radius}&e 格范围内没有找到旧的商店告示牌。"
+  pending-replaced: "&e已用新的扫描结果替换你之前待转换的告示牌列表。"
+  found: "&a在 &b{radius}&a 格范围内找到 &b{count}&a 个旧商店告示牌。"
+  entry: "&7- {action} &b{amount}&7个 &b{item}&7 位于 &f{x}&7, &f{y}&7, &f{z}"
+  more: "&7...以及另外 &b{remaining}&7 个告示牌。"
+  limit: "&e只显示前 &b{limit}&e 个告示牌。请使用更小的半径再次扫描以查看其余部分。"
+  confirm-hint: "&e执行 &b/{label} confirm &e以转换它们，或执行 &b/{label} cancel &e以放弃。"
+  no-pending: "&e你没有待处理的告示牌转换。"
+  expired: "&c你的告示牌转换已过期，请重新扫描。"
+  converted: "&a已成功转换 &b{success}&a 个告示牌。"
+  converted-partial: "&e已转换 &b{success}&e 个告示牌，但 &c{failed}&e 个无法转换。"
+  converted-none: "&c没有告示牌被转换。它们可能已被移除或不再有效。"
+  cancelled: "&e已取消待处理的告示牌转换。"
+  unknown: "&c未知的子命令。请使用 /{label} scan、/{label} confirm 或 /{label} cancel。"
+
+
+transactions:
+  errors:
+    no-economy: "&c由于没有配置经济系统，商店目前不可用。"
+    no-buy-permission: "&c你没有权限购买物品。"
+    no-sell-permission: "&c你没有权限出售物品。"
+    amount-positive: "&c数量必须为正数。"
+    not-configured: "&c该物品未在商店中配置。"
+    not-buyable: "&c该物品无法在商店购买。"
+    not-sellable: "&c该物品无法出售给商店。"
+    not-in-rotation: "&c该物品在当前商店轮换中不可用。"
+    invalid-buy-price: "&c该物品没有有效的购买价格。"
+    invalid-sell-price: "&c该物品没有有效的出售价格。"
+    invalid-spawner: "&c该刷怪笼配置不正确。"
+    invalid-custom-price: "&c该物品没有有效的价格。"
+    no-inventory-space: "&c你的背包空间不足。"
+    cannot-afford: "&c你无法负担这次购买。"
+    insufficient-items: "&c你没有足够的该物品进行出售。"
+    no-sellable-items: "&c你的背包中没有可出售的物品。"
+    no-sellable-prices: "&c你的背包中没有具有有效售价的物品。"
+    transaction-failed: "&c交易失败：{error}"
+  success:
+    purchase: "&a已购买 &b{amount}&ax &b{item}&a，价格为 &6{price}&a。"
+    sale: "&a已出售 &b{amount}&ax &b{item}&a，价格为 &6{price}&a。"
+    sell-inventory: "&a已出售 {items}&a，获得 &6{price}&a。"
+    spawner-purchase: "&a已购买 &b{amount}&ax &b{item}&a 刷怪笼，价格为 &6{price}&a。"
+  notifications:
+    inventory-leftovers: "&e由于你的背包已满，一些物品掉落在你的脚边。"
+  custom-items:
+    minion-crate:
+      name: "&d仆从宝箱钥匙"
+      lore: "&7一把据说能解锁仆从科技的神秘钥匙。"
+    vote-crate:
+      name: "&b投票宝箱钥匙"
+      lore: "&7可在任意投票宝箱站兑换。"
+    spawner-display-name: "&6{entity} &e刷怪笼"
+  restrictions:
+    minion-head: "&c仆从头只能从宝箱中获得。"
+    spawner-menu: "&c刷怪笼只能通过商店菜单购买。"
+
+gui:
+  common:
+    category-unavailable: "&c该商店分类已不可用。"
+    entry-unavailable: "&c无法找到该商店条目。请重新打开菜单。"
+    island-level-required: "&c你必须达到岛屿等级 &e{level}&c 才能使用此商店物品。"
+    cannot-purchase: "&c该物品无法在商店购买。"
+    cannot-sell: "&c该物品无法出售给商店。"
+    price-unavailable: "&c无"
+    actions:
+      buy: "购买"
+      sell: "出售"
+      buy-label: "购买"
+      sell-label: "出售"
+  custom-input:
+    prompt: "&e在聊天中输入要{action}的数量。&7（输入 'cancel' 以取消）"
+    cancelled: "&7已取消自定义数量。"
+    invalid-number: "&c请输入有效的数字。"
+    amount-positive: "&c数量必须为正数。"
+  menus:
+    main:
+      empty-title: "&c商店不可用"
+      empty-lore:
+        - "&7尚未配置任何商店分类。"
+    flat:
+      empty-title: "&c商店不可用"
+      empty-lore:
+        - "&7尚未配置任何商店物品。"
+      previous-title: "&e\u2190 上一页"
+      previous-lore:
+        - "&7前往第 {page} 页"
+      next-title: "&e下一页 \u2192"
+      next-lore:
+        - "&7前往第 {page} 页"
+      page-indicator-title: "&b第 {current} / {total} 页"
+      page-indicator-lore:
+        - "&7浏览所有商店物品。"
+    category:
+      empty-title: "&c暂无物品"
+      empty-lore:
+        - "&7此分类暂无配置物品。"
+      back-title: "&e\u2190 返回商店"
+      back-lore:
+        - "&7返回商店主菜单。"
+    quantity:
+      title-buy: "&a购买 "
+      title-sell: "&6出售 "
+      instructions: "&e左键购买，右键出售。"
+      buy-line: "&7单价购买：&a{price}"
+      buy-stack-line: "&7购买 {amount}：&a{price}"
+      buy-unavailable: "&c无法购买。"
+      sell-line: "&7单价出售：&c{price}"
+      sell-stack-line: "&7出售 {amount}：&c{price}"
+      sell-unavailable: "&c无法出售给商店。"
+      option-title: "&e{amount}x"
+      option-buy-lore:
+        - "&7购买 {amount}：&a{price}"
+        - "&e点击以{action}该数量。"
+      option-sell-lore:
+        - "&7出售 {amount}：&c{price}"
+        - "&e点击以{action}该数量。"
+      custom-title: "&b自定义数量"
+      custom-lore:
+        - "&7输入一个自定义数量以{action}。"
+        - "&8在聊天中输入数量。"
+        - "&8输入 'cancel' 返回。"
+      back-title: "&e\u2190 返回商店"
+      back-lore:
+        - "&7返回商店主菜单。"
+      level-requirement: "&c需要岛屿等级 {level}。"
+
+signs:
+  no-permission: "&c你没有权限创建商店告示牌。"
+  invalid-action: "&c第二行必须是 'buy' 或 'sell'。"
+  unknown-item: "&c未知物品：{item}"
+  invalid-amount: "&c第四行必须是一个正数。"
+  not-configured: "&c该物品未在商店中配置。"
+  not-available: "&c该物品无法通过商店进行{action}。"
+  ready: "&a商店告示牌已就绪：{action} &b{amount}&ax &b{item}&a。"
+  malformed: "&c此商店告示牌配置不正确。"
+  actions:
+    buy-verb: "购买"
+    sell-verb: "出售"
+    buy-label: "&a购买"
+    sell-label: "&c出售"
+  display:
+    header: "&2[Shop]"
+    buy-prefix: "&aBuy &7x"
+    buy-suffix: " &7for &6{price}"
+    sell-prefix: "&cSell &7x"
+    sell-suffix: " &7for &6{price}"
+    item-format: "&b{item}"
+    price-format: "&6{price}"
+    unavailable-format: "&cUnavailable"
+
+player-shops:
+  sign-format:
+    available-header: "&2[PlayerShop]"
+    out-of-stock-header: "&c[PlayerShop]"
+    owner-prefix: "&7"
+    owner-suffix: "'s"
+    unknown-owner-name: "Owner"
+    item-prefix: "&b"
+    item-middle: "&7x &b"
+    item-suffix: " -"
+    price-prefix: "&6"
+    price-suffix: " &7for &6{price}"
+    out-of-stock-line: "&cOut of Stock"
+  messages:
+    menu:
+      inventory-title: "&2Player Shop Setup"
+      confirm-button:
+        name: "&aSave Settings"
+        lore:
+          - "&7Apply these values to your next shop."
+      select-item:
+        name: "&eSelect Item"
+        lore:
+          - "&7Click an item in your inventory to choose it."
+          - "&7Current: None"
+          - "&7Click this slot to clear the selection."
+      item-selected-clear-hint: "&7Click to clear this selection."
+      quantity-display:
+        name: "&bQuantity"
+        value-format: "&ex{amount}"
+      price-display:
+        name: "&6Price"
+        value-format: "&e{price}"
+      quantity-adjust:
+        minus-one: "&c-1"
+        minus-sixteen: "&c-16"
+        plus-sixteen: "&a+16"
+        plus-one: "&a+1"
+      price-adjust:
+        minus-one: "&c-1"
+        minus-ten: "&c-10"
+        plus-ten: "&a+10"
+        plus-one: "&a+1"
+      item-description-format: "&b{amount}&7x {item}"
+      unknown-item:
+        singular: "&bItem"
+        plural: "&bItems"
+
+# English fallback keys added from messages_en.yml to ensure full key coverage
+# (keep existing translations above; these are used when a translation is missing)
+shop:
+  common:
+    menu:
+      fill-display-name: "&7 "
+    item-display-name: "&f{material}"
+    buy-line: "&7Buy {amount}: &a{buy_total}"
+    sell-line: "&7Sell {amount}: &c{sell_total}"
+    shift-click-line: "&7Shift-click {bulk_amount}: &a{buy_bulk_total} &7/ &c{sell_bulk_total}"
+    cannot-sell-line: "&7This item cannot be sold."
+    buy-only-shift-line: "&7Shift-click {bulk_amount}: &a{buy_bulk_total}"
+    spawner-display-name: "&f{spawner}"
+  categories:
+    building:
+      name: "&eBuilding Blocks"
+      icon-display-name: "&eBuilding Blocks"
+      icon-lore: "&7Blocks for construction projects."
+      menu:
+        title: "&eBuilding Blocks"
+    farming:
+      name: "&aFarming Supplies"
+      icon-display-name: "&aFarming Supplies"
+      icon-lore: "&7Common crops and farming goods."
+      menu:
+        title: "&aFarming Supplies"
+    food:
+      name: "&eFood & Meals"
+      icon-display-name: "&eFood & Meals"
+      icon-lore: "&7Everyday meals and snacks."
+      menu:
+        title: "&eFood & Meals"
+    daily_specials:
+      name: "&dDaily Specials"
+      icon-display-name: "&dDaily Specials"
+      icon-lore: "&7Hand-picked deals that change throughout the day."
+      menu:
+        title: "&dDaily Specials"
+      rotation-defaults:
+        visit-lore: "&7Visit often to catch the featured option."
+        admin-hint: "&7Admins can swap options manually by editing shop-rotations.yml."
+      item-note: "&7Limited-time special - grab it while it lasts!"
+    decorations:
+      name: "&dDecorations & Lighting"
+      icon-display-name: "&dDecorations & Lighting"
+      icon-lore: "&7Ornamental blocks and lighting."
+      menu:
+        title: "&dDecorations & Lighting"
+    enchantments:
+      name: "&5Enchantment Books"
+      icon-display-name: "&5Enchantment Books"
+      icon-lore: "&7Powerful books for upgrading your gear."
+      menu:
+        title: "&5Enchantment Books"
+      item-display-name: "&d{enchantments} Book"
+      contains-line: "&7Contains: &b{enchantments}"
+    fishing:
+      name: "&bFishing Gear"
+      icon-display-name: "&bFishing Gear"
+      icon-lore: "&7Fishing essentials and bait."
+      menu:
+        title: "&bFishing Gear"
+      item-note: "&7Freshly stocked for anglers."
+    mining:
+      name: "&bMining Resources"
+      icon-display-name: "&bMining Resources"
+      icon-lore: "&7Ores, ingots, and stone."
+      menu:
+        title: "&bMining Resources"
+      item-note: "&7Trusted by miners everywhere."
+    mob_drops:
+      name: "&cMob Drops & Combat"
+      icon-display-name: "&cMob Drops & Combat"
+      icon-lore: "&7Mob drops and combat gear."
+      menu:
+        title: "&cMob Drops & Combat"
+      item-note: "&7Favored by hunters and warriors."
+    redstone:
+      name: "&cRedstone & Utility"
+      icon-display-name: "&cRedstone & Utility"
+      icon-lore: "&7Automation components and wiring."
+      menu:
+        title: "&cRedstone & Utility"
+      sell-portal-display-name: "&6Sell Portal"
+      sell-portal-lore-1: "&7Automatically sells items that touch the portal."
+      sell-portal-lore-2: "&7Price: &a{buy}"
+      sell-portal-lore-3: "&7Only items with a shop sell price are converted."
+    spawners:
+      name: "&6Mob Spawners"
+      icon-display-name: "&6Mob Spawners"
+      icon-lore: "&7Purchase mob spawners to power your island grinders."
+      menu:
+        title: "&6Mob Spawners"
+      spawns-line: "&7Spawns: &b{spawner_name}"
+    valuables:
+      name: "&bValuables & Rares"
+      icon-display-name: "&bValuables & Rares"
+      icon-lore: "&7Rare and valuable items."
+      menu:
+        title: "&bValuables & Rares"
+      item-note: "&7Guaranteed by the shopkeeper."
+    wood:
+      name: "&aWood & Nature"
+      icon-display-name: "&aWood & Nature"
+      icon-lore: "&7Raw lumber and forestry goods."
+      menu:
+        title: "&aWood & Nature"
+
+  common:
+    prices-may-change: "&7Prices may change over time."
+
+  menu:
+    main:
+      title: "&aServer Shop"
+    category:
+      back-display-name: "&eBack"
+      back-lore: "&7Return to the main shop menu."
+
+  stock:
+    gui:
+      overview:
+        title: "&6Stock Market Overview"
+      filter:
+        all: "All Stocks"
+        category: "By Category"
+        price: "By Price"
+      localization:
+        next-page: "&aNext Page"
+        prev-page: "&cPrevious Page"
+        filter-label: "&eFilter: {filter}"
+        no-stocks: "&cNo tradable stocks found."
+        item-format: "&e{item} &7- &6{price}"
+      see-all:
+        display-name: "&bSee All Stocks"
+        lore:
+          - "&7View all available stocks in the market."
+          - "&eClick to browse everything!"
+      all-stocks:
+        title: "&bAll Stocks"
+        back-display-name: "&cBack to My Stocks"
+        back-lore: "&7Return to your stock overview"
+        filter-button-display: "&aFilter: {filter}"
+        filter-button:
+          lore:
+            click: "&7Click to cycle filters"
+            current: "&eCurrent: {filter}"
+        filters:
+          all: "All Items"
+          blocks: "Blocks"
+          items: "Items"
+        pagination:
+          previous: "&aPrevious Page"
+          next: "&aNext Page"
+        localization:
+          item-price-format: "&7Current Price: &6{price}"
+          item-blocked: "&cBlocked"
+          item-frozen: "&bFrozen"
+          no-items: "&cNo items match the current filter."
+
+  shop:
+    rotations:
+      daily_specials:
+        farming_frenzy:
+          display-name: "&aDaily Special: Farming Frenzy"
+          lore: "&7Staple crops on sale for islands stocking up."
+          menu-title: "&aDaily Special: Farming Frenzy"
+        monster_madness:
+          display-name: "&cDaily Special: Monster Madness"
+          lore: "&7Overstocked mob drops priced to move."
+          menu-title: "&cDaily Special: Monster Madness"
+          harvest_bundle:
+            display-name: "&cRotten Flesh Bundle"
+            note: "&7Fresh from tonight's mob farm cleanup."
+          seasonal_treats:
+            display-name: "&cExplosive Care Package"
+            note: "&7Perfect for crafting rockets or TNT."
+          premium_pick:
+            display-name: "&cBlaze Rod Stash"
+            note: "&7Stockpile rods for brewing stands and fuel."
+        miner_mania:
+          display-name: "&bDaily Special: Miner Mania"
+          lore: "&7Premium ore shipments delivered overnight."
+          menu-title: "&bDaily Special: Miner Mania"
+          harvest_bundle:
+            display-name: "&bBulk Iron Ingot Shipment"
+            note: "&7Perfect for hoppers, anvils, and tools."
+          seasonal_treats:
+            display-name: "&bRefined Gold Ingot Batch"
+            note: "&7Ideal for beacons, apples, and rails."
+          premium_pick:
+            display-name: "&bShimmering Diamond Parcel"
+            note: "&7Treat yourself or resell at a premium."
+
+hooks:
+  player-lacking-permission-message: "&cYou do not have permission to run shop hook commands."

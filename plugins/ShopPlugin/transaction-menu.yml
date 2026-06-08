@@ -1,0 +1,66 @@
+# Transaction Menu Configuration
+# Customize the appearance and layout of the transaction menu
+
+menu:
+  title: "&6Transaction Menu"
+  size: 54  # Double chest (6 rows)
+  border: true  # Only fill border slots with glass panes
+  border_slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+
+buttons:
+  buy:
+    slot: 20
+    active_material: STAINED_GLASS_PANE
+    active_data: 5  # Green glass pane
+    inactive_material: STAINED_GLASS_PANE
+    inactive_data: 7  # Gray glass pane
+    active_name: "&a✓ BUYING"
+    inactive_name: "&7BUYING"
+    lore:
+      - "&7Click to buy items"
+
+  sell:
+    slot: 24
+    active_material: STAINED_GLASS_PANE
+    active_data: 5  # Green glass pane
+    inactive_material: STAINED_GLASS_PANE
+    inactive_data: 7  # Gray glass pane
+    active_name: "&c✓ SELLING"
+    inactive_name: "&7SELLING"
+    lore:
+      - "&7Click to sell items"
+
+  quantity:
+    slot: 22
+    material: PAPER
+    name: "&eQuantity:"
+    show_price: true
+    price_format: "&7Price: &6"
+
+  decrease:
+    slot: 37
+    material: REDSTONE
+    name: "&c- Decrease"
+    lore:
+      - "&7Left click to decrease quantity"
+
+  increase:
+    slot: 43
+    material: GLOWSTONE
+    name: "&a+ Increase"
+    lore:
+      - "&7Left click to increase quantity"
+
+  confirm:
+    slot: 29
+    material: EMERALD_BLOCK
+    name: "&a✓ Confirm"
+    lore:
+      - "&7Click to complete transaction"
+
+  cancel:
+    slot: 33
+    material: REDSTONE_BLOCK
+    name: "&c✗ Cancel"
+    lore:
+      - "&7Click to cancel and go back"

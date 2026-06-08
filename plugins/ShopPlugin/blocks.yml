@@ -1,0 +1,28 @@
+title: "&aBlocks Shop"
+size: 27
+
+items:
+  - material: STONE
+    amount: 1
+    buy: 50.0
+    sell: 25.0
+    name: "&7Stone"
+    
+
+  - material: DIRT
+    amount: 1
+    buy: 20.0
+    sell: 10.0
+    name: "&6Dirt"
+    
+
+back:
+  material: ARROW
+  name: "&cBack"
+  slot: 26
+  lore:
+    - "&7Click to return to the main menu"
+
+border:
+  material: GRAY_STAINED_GLASS_PANE
+  style: full
